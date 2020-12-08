@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
     if(req.body._id){
         Genero.findById(req.body._id, (err, data) => {
             if(err) return  res.sendStatus(400).send({ error: 'Genero informado nao encontrado' });
+            return res.send(data);
         });
     } else {
         Genero.find({}, (err, data) => {

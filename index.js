@@ -37,6 +37,7 @@ const jogosRoute = require('./routes/jogos');
 const generoRoute = require('./routes/genero');
 const desenvolvedorRoute = require('./routes/desenvolvedor');
 const usersRoute = require('./routes/users');
+const reviewRoute = require('./routes/review');
 
 app.use('/', indexRoute);
 app.use('/console', consoleRoute);
@@ -44,6 +45,7 @@ app.use('/jogos', jogosRoute);
 app.use('/genero', generoRoute);
 app.use('/desenvolvedor', desenvolvedorRoute);
 app.use('/users', usersRoute);
+app.use('/review', reviewRoute);
 
 app.listen(3000);
 

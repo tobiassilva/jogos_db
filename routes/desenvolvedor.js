@@ -6,11 +6,12 @@ const Desenvolvedor = require('../module/desenvolvedor');
 router.get('/', (req, res) => {
     if(req.body._id){
         Desenvolvedor.findById(req.body._id, (err, data) => {
-            if(err) return  res.sendStatus(400).send({ error: 'Desenvolvedor informado nao encontrado' });
+            if(err) return  res.send({ error: 'Desenvolvedor informado nao encontrado' });
+            return res.send(data);
         });
     } else {
         Desenvolvedor.find({}, (err, data) => {
-            if(err) return res.sendStatus(400).send({ error: 'Erro ao requisitar Desenvolvedor' });
+            if(err) return res.send({ error: 'Erro ao requisitar Desenvolvedor' });
             return res.send(data);
         });
     }
