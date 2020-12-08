@@ -7,7 +7,7 @@ const JogosSchema = new Schema({
     desenvolvedor: { type: String, required: true },
     genero: { type: String, required: true },
     descricao: String,
-    imagem: String,
+    imagem: { type : Buffer, required: true },
     avaliacao: Number,
     genero_id: { type: Schema.Types.ObjectId, ref: 'Genero', require: true },
     desenvolvedor_id: { type: Schema.Types.ObjectId, ref: 'Desenvolvedor', require: true },

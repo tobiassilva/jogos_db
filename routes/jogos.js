@@ -1,18 +1,38 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 const Jogos = require('../module/jogos');
 const Console = require('../module/console');
 const Genero = require('../module/genero');
 const Desenvolvedor = require('../module/desenvolvedor');
 
+var formidable = require('formidable');
+
+
 router.get('/', (req, res) => {
+    var response = [];
     const console_id = req.body;
     if(!console_id) {
         return res.send({ error: 'console_id nao informado' });
     }else{
         Jogos.find({console_id: req.body.console_id}, (err, data) => {
             if(err) return res.send({ error: 'Erro ao requisitar Jogos' });
-            return res.send(data);
+            data.forEach((infos) => {
+                response.push({
+                    _id: infos._id,
+                    nome: infos.nome,
+                    resumo: infos.resumo,
+                    desenvolvedor: infos.desenvolvedor,
+                    genero: infos.genero,
+                    descricao: infos.descricao,
+                    imagem: 'data:image/jpeg;base64,'+infos.imagem.toString('base64'),
+                    avaliacao: infos.avaliacao,
+                    genero_id: infos.genero_id,
+                    desenvolvedor_id: infos.desenvolvedor_id,
+                    console_id: infos.console_id
+                });
+            });
+            return res.json(response || '');
         });
     }
 
@@ -21,48 +41,58 @@ router.get('/', (req, res) => {
 
 // POST
 router.post('/', (req, res) => {
-    if(req.body.avaliacao) return res.sendStatus(400).send({ error: 'Campo "Avaliacao" não deve ser informado' });
+    if(req.body.avaliacao) return res.send({ error: 'Campo "Avaliacao" não deve ser informado' });
 
     if(
         !req.body.nome ||
         !req.body.desenvolvedor ||
         !req.body.genero ||
+        !req.body.imagem ||
         !req.body.console_id ||
         !req.body.genero_id ||
         !req.body.desenvolvedor_id
     ) return res.sendStatus(400).send({ error: 'Dados obrigatórios Faltantes' });
 
-    // procura Console referenciado
-    Console.findById(req.body.console_id, async (errConsole, docConsole) => {
-        if(errConsole) res.sendStatus(400).send({ error: 'Console informado não encontrado' });
+    var form = new formidable.IncomingForm();
 
-        // procura Genero referenciado
-        Genero.findById(req.body.genero_id, async (errGen, docGen) => {
-            if(errGen) res.sendStatus(400).send({ error: 'Genero informado não encontrado' });
-            
-            // procura Desenvolvedor referenciado
-            Desenvolvedor.findById(req.body.desenvolvedor_id, async (errDes, docDes) => {
-                if(errDes) res.sendStatus(400).send({ error: 'Desenvolvedor informado não encontrado' });
-            
-                const newJogo = new Jogos({ ...req.body });
-                await newJogo.save();
+    form.parse(req, function(erros, campos, arquivos) {
+          var file = arquivos.imagem;
+          console.log('Arquivo de imagem');
+          console.log(file);
 
-                await docConsole.jogos.push(newJogo);
-                await docConsole.save();
+          // procura Console referenciado
+            Console.findById(req.body.console_id, async (errConsole, docConsole) => {
+                if(errConsole) res.sendStatus(400).send({ error: 'Console informado não encontrado' });
 
-                await docGen.jogos.push(newJogo);
-                await docGen.save();
+                // procura Genero referenciado
+                Genero.findById(req.body.genero_id, async (errGen, docGen) => {
+                    if(errGen) res.sendStatus(400).send({ error: 'Genero informado não encontrado' });
+                    
+                    // procura Desenvolvedor referenciado
+                    Desenvolvedor.findById(req.body.desenvolvedor_id, async (errDes, docDes) => {
+                        if(errDes) res.sendStatus(400).send({ error: 'Desenvolvedor informado não encontrado' });
 
-                await docDes.jogos.push(newJogo);
-                await docDes.save();
+                        fs.readFile(file.path, (err, data) => {
+                            if(err) res.send({ error: 'Erro imagem' + err });
 
-                return res.sendStatus(200).send(newJogo);
+                            const newJogo = new Jogos({ ...req.body, imagem: data });
+                            await newJogo.save();
+
+                            await docConsole.jogos.push(newJogo);
+                            await docConsole.save();
+
+                            await docGen.jogos.push(newJogo);
+                            await docGen.save();
+
+                            await docDes.jogos.push(newJogo);
+                            await docDes.save();
+
+                            return res.sendStatus(200).send(newJogo);
+                        });
+                    });
+                });
             });
-            
-
         });
-    });
-
 });
 
 module.exports = router;
