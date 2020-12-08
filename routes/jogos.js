@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
                     Desenvolvedor.findById(req.body.desenvolvedor_id, async (errDes, docDes) => {
                         if(errDes) res.sendStatus(400).send({ error: 'Desenvolvedor informado não encontrado' });
 
-                        fs.readFile(file.path, (err, data) => {
+                        fs.readFile(file.path, async (err, data) => {
                             if(err) res.send({ error: 'Erro imagem' + err });
 
                             const newJogo = new Jogos({ ...req.body, imagem: data });

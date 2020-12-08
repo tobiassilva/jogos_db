@@ -36,12 +36,14 @@ const consoleRoute = require('./routes/console');
 const jogosRoute = require('./routes/jogos');
 const generoRoute = require('./routes/genero');
 const desenvolvedorRoute = require('./routes/desenvolvedor');
+const usersRoute = require('./routes/users');
 
 app.use('/', indexRoute);
 app.use('/console', consoleRoute);
 app.use('/jogos', jogosRoute);
 app.use('/genero', generoRoute);
 app.use('/desenvolvedor', desenvolvedorRoute);
+app.use('/users', usersRoute);
 
 app.listen(3000);
 
