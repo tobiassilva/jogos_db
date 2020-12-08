@@ -1,0 +1,17 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const JogosSchema = new Schema({
+    nome: { type: String, required: true, unique: true },
+    resumo: String,
+    desenvolvedor: { type: String, required: true },
+    genero: { type: String, required: true },
+    descricao: String,
+    imagem: String,
+    avaliacao: Number,
+    genero_id: { type: Schema.Types.ObjectId, ref: 'Genero', require: true },
+    desenvolvedor_id: { type: Schema.Types.ObjectId, ref: 'Desenvolvedor', require: true },
+    console_id: { type: Schema.Types.ObjectId, ref: 'Console', require: true }
+});
+
+module.exports = mongoose.model('Jogos', JogosSchema);
