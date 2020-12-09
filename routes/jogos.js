@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
 });*/
 
 router.get('/', (req, res) => {
-    const console1 = req.body.cons;
+    const console1 = req.query['console'];
     console.log(console1);
     if(!console1) {
         return res.send({ error: 'console nao informado' });
@@ -52,7 +52,20 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/topgames', (req, res) => {
+router.get('/jogo', (req, res) => {
+    const nome = req.query['nome'];
+    console.log(nome);
+    if(!nome) {
+        return res.send({ error: 'nome nao informado' });
+    }else{
+        Jogos.find({nome: nome}, (err, data) => {
+            if (err) return res.send({ error: 'Erro na procura de jogo' });
+            return res.send(data);
+        });
+    }
+});
+
+router.get('/topGames', (req, res) => {
     const console1 = req.query['console'];
     /*console.log(req.query);
     console.log(console1);*/
