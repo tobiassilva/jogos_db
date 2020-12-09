@@ -43,7 +43,7 @@ router.post('/login', (req, res) => {
         if(!data) return res.send({ error: 'Usuário não cadastrado!' }); //encontrou o email no banco igual o informado
 
         console.log(data._id);
-        return res.send(data._id);
+        return res.send(data);
 
         /*Users.create(req.body, (err, data) => { // req.body = { email: email, password: password }
             if(err) return res.send({ error: 'Erro ao criar usuário!' });
