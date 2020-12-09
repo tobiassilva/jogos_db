@@ -72,6 +72,25 @@ router.post('/', (req, res) => {
         !req.body.desenvolvedor ||
         !req.body.genero ||
         !req.body.imagem ||
+        !req.body.console
+    ) return res.sendStatus(400).send({ error: 'Dados obrigatórios Faltantes' });
+
+            // procura Desenvolvedor referenciado
+            Jogos.create(req.body, (err, data) => {
+                if(err) return res.send({ error: 'Erro ao criar jogo!' });
+
+                return res.send(data);
+            });
+});
+
+/*router.post('/', (req, res) => {
+    if(req.body.avaliacao) return res.send({ error: 'Campo "Avaliacao" não deve ser informado' });
+
+    if(
+        !req.body.nome ||
+        !req.body.desenvolvedor ||
+        !req.body.genero ||
+        !req.body.imagem ||
         !req.body.console_id ||
         !req.body.genero_id ||
         !req.body.desenvolvedor_id
@@ -117,6 +136,6 @@ router.post('/', (req, res) => {
                 });
             });
         });
-});
+});*/
 
 module.exports = router;
