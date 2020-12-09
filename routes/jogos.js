@@ -40,27 +40,29 @@ router.get('/', (req, res) => {
 });*/
 
 router.get('/', (req, res) => {
-    const console = req.body;
-    if(!console) {
+    const console1 = req.body.cons;
+    console.log(console1);
+    if(!console1) {
         return res.send({ error: 'console nao informado' });
     }else{
-        Jogos.find({console: req.body.console}, (err, data) => {
-            if (err) return res.send({ error: 'Erro na consulta de usuários' });
+        Jogos.find({console: console1}, (err, data) => {
+            if (err) return res.send({ error: 'Erro na consulta de jogos' });
             return res.send(data);
         });
     }
 });
 
-router.get('/topGames', (req, res) => {
-    const console = req.body;
-    if(!console) {
-        return res.send({ error: 'console nao informado' });
-    }else{
-        Jogos.find({console: req.body.console}, (err, data) => {
-            if (err) return res.send({ error: 'Erro na consulta de usuários' });
-            return res.send(data);
-        }).sort({avaliacao: 1}).limit(3);
-    }
+router.get('/topgames', (req, res) => {
+    const console1 = req.query['console'];
+    /*console.log(req.query);
+    console.log(console1);*/
+    if(!console1) return res.send({ error: 'console nao informado' });
+    
+    Jogos.find({console: { $eq: console1 }}, (err, data) => {
+        if (err) return res.send({ error: 'Erro na consulta de usuários' });
+        return res.send(data);
+    }).sort({avaliacao: 1}).limit(3);
+
 });
 
 // POST
