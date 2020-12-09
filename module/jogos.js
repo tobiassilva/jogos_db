@@ -6,12 +6,14 @@ const JogosSchema = new Schema({
     resumo: String,
     desenvolvedor: { type: String, required: true },
     genero: { type: String, required: true },
+    console: { type: String, required: true },
     descricao: String,
-    imagem: { type : Buffer, required: true },
-    avaliacao: Number,
-    genero_id: { type: Schema.Types.ObjectId, ref: 'Genero', require: true },
-    desenvolvedor_id: { type: Schema.Types.ObjectId, ref: 'Desenvolvedor', require: true },
-    console_id: { type: Schema.Types.ObjectId, ref: 'Console', require: true }
+    //imagem: { type : Buffer, required: true },
+    imagem: { type: String, required: true },
+    avaliacao: { type: Number, default: 0 },
+    //genero_id: { type: Schema.Types.ObjectId, ref: 'Genero', require: true },
+    //desenvolvedor_id: { type: Schema.Types.ObjectId, ref: 'Desenvolvedor', require: true },
+    //console_id: { type: Schema.Types.ObjectId, ref: 'Console', require: true }
 });
 
 module.exports = mongoose.model('Jogos', JogosSchema);

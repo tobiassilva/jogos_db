@@ -8,7 +8,7 @@ const Desenvolvedor = require('../module/desenvolvedor');
 
 var formidable = require('formidable');
 
-
+/*
 router.get('/', (req, res) => {
     var response = [];
     const console_id = req.body;
@@ -37,6 +37,30 @@ router.get('/', (req, res) => {
     }
 
     
+});*/
+
+router.get('/', (req, res) => {
+    const console = req.body;
+    if(console) {
+        return res.send({ error: 'console nao informado' });
+    }else{
+        Jogos.find({console: req.body.console}, (err, data) => {
+            if (err) return res.send({ error: 'Erro na consulta de usuários' });
+            return res.send(data);
+        });
+    }
+});
+
+router.get('/topGames', (req, res) => {
+    const console = req.body;
+    if(console) {
+        return res.send({ error: 'console nao informado' });
+    }else{
+        Jogos.find({console: req.body.console}, (err, data) => {
+            if (err) return res.send({ error: 'Erro na consulta de usuários' });
+            return res.send(data);
+        }).sort({avaliacao: 1}).limit(3);
+    }
 });
 
 // POST
