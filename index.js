@@ -2,6 +2,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+var cors = require('cors');
 
 ///CONNECT DB CLOUD.MONGODB
 
@@ -30,6 +31,8 @@ mongoose.connection.on('connected', () => {
 //BODY PARSER
 app.use(bodyparser.urlencoded({ extended:false }));
 app.use(bodyparser.json());
+
+app.use(cors());
 
 const indexRoute = require('./routes/index');
 const consoleRoute = require('./routes/console');
