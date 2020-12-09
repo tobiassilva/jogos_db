@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
 
 router.get('/topGames', (req, res) => {
     const console = req.body;
-    if(console) {
+    if(!console) {
         return res.send({ error: 'console nao informado' });
     }else{
         Jogos.find({console: req.body.console}, (err, data) => {
