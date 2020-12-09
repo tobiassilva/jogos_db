@@ -77,7 +77,7 @@ router.post('/', (req, res) => {
 
     console.log(req.body);
     Jogos.create(req.body, (err, data) => {
-        if(err) return res.send({ error: 'Erro ao criar jogo!' });
+        if(err) return res.send({ error: 'Erro ao criar jogo!' + err });
 
         return res.send(data);
     });
