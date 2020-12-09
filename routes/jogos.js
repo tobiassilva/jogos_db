@@ -75,12 +75,12 @@ router.post('/', (req, res) => {
         !req.body.console
     ) return res.sendStatus(400).send({ error: 'Dados obrigatórios Faltantes' });
 
-            // procura Desenvolvedor referenciado
-            Jogos.create(req.body, (err, data) => {
-                if(err) return res.send({ error: 'Erro ao criar jogo!' });
+    console.log(req.body);
+    Jogos.create(req.body, (err, data) => {
+        if(err) return res.send({ error: 'Erro ao criar jogo!' });
 
-                return res.send(data);
-            });
+        return res.send(data);
+    });
 });
 
 /*router.post('/', (req, res) => {
