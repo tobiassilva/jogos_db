@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
         !req.body.genero ||
         !req.body.imagem ||
         !req.body.console
-    ) return res.sendStatus(400).send({ error: 'Dados obrigatórios Faltantes' });
+    ) return res.send({ error: 'Dados obrigatórios Faltantes' });
 
     console.log(req.body);
     Jogos.create(req.body, (err, data) => {
