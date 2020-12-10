@@ -25,24 +25,35 @@ router.get('/', (req, res) => {
 // POST
 router.post('/', (req, res) => {
     
+    const { nota, nome, texto, email } = req.body;
+
     if(
-        !req.body.nota ||
-        !req.body.texto ||
-        !req.body.nome ||
-        !req.body.email
+        !nota ||
+        !texto ||
+        !nome ||
+        !email
     ) return res.send({ error: 'Dados obrigatórios Faltantes' });
 
           // procura Jogo referenciado
-          Jogos.find({nome: req.body.nome}, async (err, doc) => {
+          Jogos.findOne({nome: nome}, async (err, doc) => {
             if(err) res.sendStatus(400).send({ error: 'Jogo informado não encontrado' });
 
-            const newRev = new Review({ ...req.body, jogos_id: doc._id });
+            console.log(doc);
+
+            const newRev = new Review({ nome: nome, email: email, nota: nota, texto: texto, jogos_id: doc._id });
             await newRev.save();
 
-            await doc.reviews.push(newRev);
-            await doc.save();
+            console.log(newRev);
+            if (Array.isArray(doc.reviews)) {
+                await doc.reviews.push(newRev);
+                await doc.save();
+            } else {
+                doc.reviews = await newRev;
+                await doc.save();
+            }
+            
 
-            console.log(doc);
+            console.log('AAAAAAAAAAAA');
             doc.avaliacao = (doc.avaliacao + req.body.nota)/doc.reviews.length;
             await doc.save();
 

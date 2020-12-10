@@ -39,42 +39,51 @@ router.get('/', (req, res) => {
     
 });*/
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     const console1 = req.query['console'];
     console.log(console1);
     if(!console1) {
         return res.send({ error: 'console nao informado' });
     }else{
-        Jogos.find({console: console1}, (err, data) => {
-            if (err) return res.send({ error: 'Erro na consulta de jogos' });
-            return res.send(data);
-        });
+        try {
+        const dataJogos = await Jogos.find({console: console1}).populate('Review');
+        return res.send(dataJogos);
+    }  catch(err){
+        return res.send({ error: 'Erro na consulta de jogos'+err });
+    }
     }
 });
 
-router.get('/jogo', (req, res) => {
+router.get('/jogo', async (req, res) => {
     const nome = req.query['nome'];
     console.log(nome);
     if(!nome) {
         return res.send({ error: 'nome nao informado' });
     }else{
-        Jogos.find({nome: nome}, (err, data) => {
+        try{
+            const jogoAux = await Jogos.find({nome: nome}).populate('reviews');
+    
+            return res.send(jogoAux);
+        } catch(err){
+            return res.send({ error: err });
+        }
+
+        /*Jogos.find({nome: nome}, (err, data) => {
             if (err) return res.send({ error: 'Erro na procura de jogo' });
             return res.send(data);
-        });
+        }).populate('Review');*/
     }
 });
 
-router.get('/topGames', (req, res) => {
+router.get('/topGames', async (req, res) => {
     const console1 = req.query['console'];
     /*console.log(req.query);
     console.log(console1);*/
     if(!console1) return res.send({ error: 'console nao informado' });
     
-    Jogos.find({console: { $eq: console1 }}, (err, data) => {
-        if (err) return res.send({ error: 'Erro na consulta de usuários' });
-        return res.send(data);
-    }).sort({avaliacao: 1}).limit(3);
+    const dataTopGame = await Jogos.find({console: { $eq: console1 }}).sort({avaliacao: 1}).limit(3).populate('Review');
+    
+    return res.send(dataTopGame);
 
 });
 
