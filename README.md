@@ -103,11 +103,11 @@ método get:
 > retorna todos os reviews referentes ao jogo
 
 método post:
--> campos obrigatórios
-  <ul><li>nota</li> 
-  <li>nome</li>
-  <li>texto</li>
-  <li>email</li></ul>
+> -> campos obrigatórios
+	  <ul><li>nota</li> 
+	  <li>nome</li>
+	  <li>texto</li>
+	  <li>email</li></ul>
 
 <h3>"/users"</h3>
 método get:
@@ -116,13 +116,13 @@ método get:
 <h3>"/users/create"</h3>
 método post:
 > -> campos obrigatórios: 
-  <ul><li>nome</li>
-  <li>email</li>
-  <li>senha</li></ul>
+	  <ul><li>nome</li>
+	  <li>email</li>
+	  <li>senha</li></ul>
 
 <h3>"/users/login"</h3>
 método post:
 > -> campos obrigatórios: 
-  <ul><li>email</li>
-  <li>senha</li></ul>
+	  <ul><li>email</li>
+	  <li>senha</li></ul>
 
