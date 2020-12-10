@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
         return res.send({ error: 'console nao informado' });
     }else{
         try {
-        const dataJogos = await Jogos.find({console: console1}).populate('Review');
+        const dataJogos = await Jogos.find({console: console1}).populate('reviews');
         return res.send(dataJogos);
     }  catch(err){
         return res.send({ error: 'Erro na consulta de jogos'+err });
@@ -81,7 +81,7 @@ router.get('/topGames', async (req, res) => {
     console.log(console1);*/
     if(!console1) return res.send({ error: 'console nao informado' });
     
-    const dataTopGame = await Jogos.find({console: { $eq: console1 }}).sort({avaliacao: 1}).limit(3).populate('Review');
+    const dataTopGame = await Jogos.find({console: { $eq: console1 }}).sort({avaliacao: 1}).limit(3).populate('reviews');
     
     return res.send(dataTopGame);
 
@@ -104,6 +104,18 @@ router.post('/', (req, res) => {
         if(err) return res.send({ error: 'Erro ao criar jogo!' + err });
 
         return res.send(data);
+    });
+});
+
+//DELETE
+router.delete('/', (req, res) => {
+    //const { nome } = req.body;
+
+    //if(!nome) return res.send({ error: 'Nome do Partido deve ser Adicionado' });
+
+    Jogos.deleteMany({}, (err, data) => {
+        if(err) return res.send({ error: 'Erro ao excluir Jogos' });
+        return res.send('Jogos excluidos com Sucesso');
     });
 });
 

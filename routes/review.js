@@ -27,6 +27,8 @@ router.post('/', (req, res) => {
     
     const { nota, nome, texto, email } = req.body;
 
+    console.log(email);
+
     if(
         !nota ||
         !texto ||
@@ -38,9 +40,10 @@ router.post('/', (req, res) => {
           Jogos.findOne({nome: nome}, async (err, doc) => {
             if(err) res.sendStatus(400).send({ error: 'Jogo informado não encontrado' });
 
-            console.log(doc);
+            //console.log(doc);
+            const val = await email;
 
-            const newRev = new Review({ nome: nome, email: email, nota: nota, texto: texto, jogos_id: doc._id });
+            const newRev = new Review({ nome: nome, email: val, nota: nota, texto: texto, jogos_id: doc._id });
             await newRev.save();
 
             console.log(newRev);
@@ -59,6 +62,18 @@ router.post('/', (req, res) => {
 
             return res.send(newRev);
         });
+});
+
+//DELETE
+router.delete('/', (req, res) => {
+    //const { nome } = req.body;
+
+    //if(!nome) return res.send({ error: 'Nome do Partido deve ser Adicionado' });
+
+    Review.deleteMany({}, (err, data) => {
+        if(err) return res.send({ error: 'Erro ao excluir Dados' });
+        return res.send('dados excluidos com Sucesso');
+    });
 });
 
 module.exports = router;

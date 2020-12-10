@@ -54,5 +54,17 @@ router.post('/login', (req, res) => {
     });
 });
 
+//DELETE
+router.delete('/', (req, res) => {
+    //const { nome } = req.body;
+
+    //if(!nome) return res.send({ error: 'Nome do Partido deve ser Adicionado' });
+
+    Users.deleteMany({}, (err, data) => {
+        if(err) return res.send({ error: 'Erro ao excluir Users' });
+        return res.send('Users excluidos com Sucesso');
+    });
+});
+
 module.exports = router;
 

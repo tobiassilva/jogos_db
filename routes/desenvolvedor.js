@@ -35,4 +35,16 @@ router.post('/', (req, res) => {
     });
 });
 
+//DELETE
+router.delete('/', (req, res) => {
+    //const { nome } = req.body;
+
+    //if(!nome) return res.send({ error: 'Nome do Partido deve ser Adicionado' });
+
+    Desenvolvedor.deleteMany({}, (err, data) => {
+        if(err) return res.send({ error: 'Erro ao excluir Desenvolvedor' });
+        return res.send('Desenvolvedor excluidos com Sucesso');
+    });
+});
+
 module.exports = router;

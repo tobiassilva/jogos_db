@@ -35,4 +35,16 @@ router.post('/', (req, res) => {
     });
 });
 
+//DELETE
+router.delete('/', (req, res) => {
+    //const { nome } = req.body;
+
+    //if(!nome) return res.send({ error: 'Nome do Partido deve ser Adicionado' });
+
+    Genero.deleteMany({}, (err, data) => {
+        if(err) return res.send({ error: 'Erro ao excluir Genero' });
+        return res.send('Genero excluidos com Sucesso');
+    });
+});
+
 module.exports = router;
