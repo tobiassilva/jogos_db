@@ -6,7 +6,7 @@
 
 
 <h3>"/"</h3>
-> raíz, retorna um texto de confirmação de conexão
+<blockquote> raíz, retorna um texto de confirmação de conexão</blockquote>
 
 
 <h3>"/console"</h3>
