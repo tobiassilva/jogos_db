@@ -109,19 +109,21 @@ método post:
 	  <li>texto</li>
 	  <li>email</li></ul>
 
+
 <h3>"/users"</h3>
-método get:
+método get:<br>
 > retorna todos os usuários cadastrados
 
+
 <h3>"/users/create"</h3>
-método post:
+método post:<br>
 > -> campos obrigatórios: 
 	  <ul><li>nome</li>
 	  <li>email</li>
 	  <li>senha</li></ul>
 
 <h3>"/users/login"</h3>
-método post:
+método post:<br>
 > -> campos obrigatórios: 
 	  <ul><li>email</li>
 	  <li>senha</li></ul>
