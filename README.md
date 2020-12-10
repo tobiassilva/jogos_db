@@ -116,13 +116,13 @@ método get:
 <h3>"/users/create"</h3>
 método post:
 > -> campos obrigatórios: 
-	  <ul><li>nome</li>
-	  <li>email</li>
-	  <li>senha</li></ul>
+>	  <ul><li>nome</li>
+>	  <li>email</li>
+>	  <li>senha</li></ul>
 
 <h3>"/users/login"</h3>
 método post:
 > -> campos obrigatórios: 
-	  <ul><li>email</li>
-	  <li>senha</li></ul>
+>	  <ul><li>email</li>
+>	  <li>senha</li></ul>
 
