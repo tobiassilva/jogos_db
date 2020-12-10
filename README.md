@@ -6,20 +6,20 @@
 
 
 "/"
-raíz, retorna um texto de confirmação de conexão
+> raíz, retorna um texto de confirmação de conexão
 
 
 "/console"
 
 método get:
-retorna todos os consoles
+> retorna todos os consoles
 
 método post:
 -> campos obrigatórios: 
-	nome
+>	<ul><li>nome</ul></li>
   
 método delete:
- exclui todos os consoles cadastrados
+ > exclui todos os consoles cadastrados
 
 
 "/genero"
