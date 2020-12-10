@@ -85,44 +85,44 @@ método delete:
  <h3>"/jogos/jogo"</h3>
 
 método get:
-deve passar o parâmetro "nome" que é o nome do jogo correspondente
-retorna os dados do jogo requisitado
+> deve passar o parâmetro "nome" que é o nome do jogo correspondente
+> retorna os dados do jogo requisitado
 
 
  <h3>"/jogos/topGames"</h3>
 
 método get:
-deve passar o parâmetro "nome" que é o nome do console correspondente
-retorna os 3 jogos melhores avaliados do console correspondente ( em ordem de avaliação )
+> deve passar o parâmetro "nome" que é o nome do console correspondente
+> retorna os 3 jogos melhores avaliados do console correspondente ( em ordem de avaliação )
 
 
 <h3>"/review"</h3>
 
 método get:
-deve passar o parâmetro "nome" que é o nome do jogo correspondente
-retorna todos os reviews referentes ao jogo
+> deve passar o parâmetro "nome" que é o nome do jogo correspondente
+> retorna todos os reviews referentes ao jogo
 
 método post:
 -> campos obrigatórios
-  nota, 
-  nome, 
-  texto, 
-  email
+  <ul><li>nota</li> 
+  <li>nome</li>
+  <li>texto</li>
+  <li>email</li></ul>
 
 <h3>"/users"</h3>
 método get:
-retorna todos os usuários cadastrados
+> retorna todos os usuários cadastrados
 
 <h3>"/users/create"</h3>
 método post:
--> campos obrigatórios: 
-  nome
-  email
-  senha
+> -> campos obrigatórios: 
+  <ul><li>nome</li>
+  <li>email</li>
+  <li>senha</li></ul>
 
 <h3>"/users/login"</h3>
 método post:
--> campos obrigatórios: 
-  email
-  senha
+> -> campos obrigatórios: 
+  <ul><li>email</li>
+  <li>senha</li></ul>
 
