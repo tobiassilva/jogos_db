@@ -5,17 +5,17 @@
 <p>Segue abaixo os caminhos e opções que você tem</p>
 
 
-"/"
+<h4>"/"</h4>
 > raíz, retorna um texto de confirmação de conexão
 
 
-"/console"
+<h4>"/console"</h4>
 
 método get:
 > retorna todos os consoles
 
 método post:
--> campos obrigatórios: 
+> -> campos obrigatórios: 
 >	<ul><li>nome</ul></li>
   
 método delete:
