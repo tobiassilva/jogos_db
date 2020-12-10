@@ -112,19 +112,19 @@ método post:
 
 <h3>"/users"</h3>
 método get:<br>
-> retorna todos os usuários cadastrados
+<blockquote> retorna todos os usuários cadastrados</blockquote>
 
 
 <h3>"/users/create"</h3>
 método post:<br>
-> -> campos obrigatórios: 
+<blockquote> -> campos obrigatórios: 
 	  <ul><li>nome</li>
 	  <li>email</li>
-	  <li>senha</li></ul>
+	  <li>senha</li></ul></blockquote>
 
 <h3>"/users/login"</h3>
 método post:<br>
-> -> campos obrigatórios: 
+<blockquote> -> campos obrigatórios: 
 	  <ul><li>email</li>
-	  <li>senha</li></ul>
+	  <li>senha</li></ul></blockquote>
 
