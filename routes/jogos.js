@@ -81,7 +81,7 @@ router.get('/topGames', async (req, res) => {
     console.log(console1);*/
     if(!console1) return res.send({ error: 'console nao informado' });
     
-    const dataTopGame = await Jogos.find({console: { $eq: console1 }}).sort({avaliacao: 1}).limit(3).populate('reviews');
+    const dataTopGame = await Jogos.find({console: { $eq: console1 }}).sort({avaliacao: -1}).limit(3).populate('reviews');
     
     return res.send(dataTopGame);
 
